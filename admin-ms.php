@@ -142,7 +142,7 @@ $adData = ConfigData::getAdData();
                             <div class="form-group">
                                 <label for="">网站当前模式：{{chargeTypeForm.chargeTypeText}}</label>
                             </div>
-                            <button type="button" class="btn btn-default" @click="submitChargeTypeForm()">{{chargeTypeForm.btnText}}</button>
+                            <button type="button" class="btn btn-default" @click="submitChargeTypeForm()" style="margin-left: 10px;">{{chargeTypeForm.btnText}}</button>
                             <span v-if="chargeTypeForm.errorTip" style="color: red;font-size: 14px;">{{chargeTypeForm.errorTip}}</span>
                         </div>
 
