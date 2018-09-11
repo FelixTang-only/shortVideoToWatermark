@@ -272,7 +272,7 @@ $adData = ConfigData::getAdData();
             		if (newVal === 0) {
                 		this.chargeTypeForm.expectChargeType = 1;
                 		this.chargeTypeForm.chargeTypeText = '免费模式';
-                		this.chargeTypeForm.btnText = '切换为收费模式';
+                		this.chargeTypeForm.btnText = '切换为付费模式';
             		}else {
                 		this.chargeTypeForm.expectChargeType = 0;
                 		this.chargeTypeForm.chargeTypeText = '付费模式';
