@@ -260,6 +260,6 @@ $adData = json_decode(ConfigData::getAdData(), true);
 <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="static/js/vue.min.js"></script>
-<script src="static/js/site.js?v4"></script>
+<script src="static/js/site.js?v5"></script>
 </body>
 </html>
