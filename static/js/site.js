@@ -1,3 +1,7 @@
+/*!
+ * site.css
+ * (c) 2015-2018 iiiLab.com
+ */
 function parseSuffix(url) {
     var parser = document.createElement('a');
     parser.href = url;
