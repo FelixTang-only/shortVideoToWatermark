@@ -17,25 +17,30 @@ $result = array(
     "succ" => false
 );
 
+$config = ConfigData::getConfigData();
 
-//未登录
-if(!isset($_SESSION['user'])) {
-    if (isset($_COOKIE['video_user'])) {
-        setcookie("video_user", "", time()-3600,  "/");
+//收费模式
+if ($config['chargeType'] == 1) {
+    //未登录
+    if(!isset($_SESSION['user'])) {
+        if (isset($_COOKIE['video_user'])) {
+            setcookie("video_user", "", time()-3600,  "/");
+        }
+        $result['retDesc'] = "用户未登录，请先登录或注册";
+        exit(json_encode($result));
     }
-    $result['retDesc'] = "用户未登录，请先登录或注册";
-    exit(json_encode($result));
+
+    if (empty($_SESSION['user']['vip_expire_time']) && $_SESSION['user']['experience_used'] >= 1) {
+        $result['retDesc'] = "免费体验次数已用尽，请激活VIP";
+        exit(json_encode($result));
+    }
+
+    if (!empty($_SESSION['user']['vip_expire_time']) && time() > $_SESSION['user']['vip_expire_time']) {
+        $result['retDesc'] = "VIP已过期，请激活VIP";
+        exit(json_encode($result));
+    }
 }
 
-if (empty($_SESSION['user']['vip_expire_time']) && $_SESSION['user']['experience_used'] >= 1) {
-    $result['retDesc'] = "免费体验次数已用尽，请激活VIP";
-    exit(json_encode($result));
-}
-
-if (!empty($_SESSION['user']['vip_expire_time']) && time() > $_SESSION['user']['vip_expire_time']) {
-    $result['retDesc'] = "VIP已过期，请激活VIP";
-    exit(json_encode($result));
-}
 
 if (empty($_POST['link'])) {
     $result['retDesc'] = "缺少参数";
@@ -43,7 +48,6 @@ if (empty($_POST['link'])) {
 }
 
 //判断是否已配置接口密钥
-$config = ConfigData::getConfigData();
 if (empty($config['iiiLab_client']) || empty($config['iiiLab_clientSecretKey'])) {
     $result['retDesc'] = "缺少配置信息:解析接口密钥，请联系站长";
     exit(json_encode($result));
@@ -76,10 +80,14 @@ $options = array(
 
 $result = file_get_contents($iiiLabVideoDownloadURL, false, stream_context_create($options));
 
-//如果是体验 计数
-if (empty($_SESSION['user']['vip_expire_time'])) {
-    $_SESSION['user']['experience_used'] = $_SESSION['user']['experience_used'] + 1;
-    $db = Db::instance();
-    $db->update( 'video_user', 'experience_used', $_SESSION['user']['experience_used'], $_SESSION['user']['id'] );
+//收费模式
+if ($config['chargeType'] == 1) {
+    //如果是体验 计数
+    if (empty($_SESSION['user']['vip_expire_time'])) {
+        $_SESSION['user']['experience_used'] = $_SESSION['user']['experience_used'] + 1;
+        $db = Db::instance();
+        $db->update( 'video_user', 'experience_used', $_SESSION['user']['experience_used'], $_SESSION['user']['id'] );
+    }
 }
+
 exit($result);
