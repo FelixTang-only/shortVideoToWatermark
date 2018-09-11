@@ -133,12 +133,14 @@ $adData = ConfigData::getAdData();
                         <h4>站点模式配置</h4>
 
                         <div class="form-inline">
+                            <p>
+                                <small>
+                                    免费模式：任务人都可以免费无限制使用
+                                    <br>收费模式：用户注册登录后有1次免费试用机会，超出后需购买激活码激活成为会员
+                                </small>
+                            </p>
                             <div class="form-group">
                                 <label for="">网站当前模式：{{chargeTypeForm.chargeTypeText}}</label>
-                                <p><small>
-                                免费模式：任务人都可以免费无限制使用
-                                <br>收费模式：用户注册登录后有1次免费试用机会，超出后需购买激活码激活成为会员
-                                </small></p>
                             </div>
                             <button type="button" class="btn btn-default" @click="submitChargeTypeForm()">{{chargeTypeForm.btnText}}</button>
                             <span v-if="chargeTypeForm.errorTip" style="color: red;font-size: 14px;">{{chargeTypeForm.errorTip}}</span>
