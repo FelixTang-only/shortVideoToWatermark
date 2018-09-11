@@ -1,6 +1,7 @@
 <?php
 include_once "page_common.php";
 require './config/ConfigData.php';
+$config = ConfigData::getConfigData();
 $adData = json_decode(ConfigData::getAdData(), true);
 ?>
 <!DOCTYPE html>
@@ -26,7 +27,9 @@ $adData = json_decode(ConfigData::getAdData(), true);
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:$('#activationModal').modal('show');">激活VIP</a></li>
+                <?php if ($config['chargeType'] == 1) { ?>
+                    <li><a href="javascript:$('#activationModal').modal('show');">激活VIP</a></li>
+                <?php } ?>
                 <?php
                  if (empty($_SESSION['user']['phone'])) {
                 ?>
