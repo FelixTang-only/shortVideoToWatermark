@@ -1,7 +1,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="referrer" content="never">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/site.css?v31" rel="stylesheet">
     <link rel="shortcut icon" href="static/img/favicon.ico">
