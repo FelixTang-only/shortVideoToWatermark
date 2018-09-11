@@ -258,14 +258,14 @@ $adData = ConfigData::getAdData();
                 errorTip: ''
             },
 		chargeTypeForm:{
-		   chargeType: <?php echo $config['chargeType']; ?>,
+		   chargeType: -1,
 		   expectChargeType: 1,
 		   chargeTypeText: '',
 		   btnText: '',
                    errorTip: ''
 		}
         },
-	watch: {
+	    watch: {
         	'chargeTypeForm.chargeType': function(newVal,oldVal) {
             		if (newVal === 0) {
                 		this.chargeTypeForm.expectChargeType = 1;
@@ -279,6 +279,9 @@ $adData = ConfigData::getAdData();
         	}
     	},
         methods: {
+            init: function () {
+                this.chargeTypeForm.chargeType = <?php echo $config['chargeType']; ?>;
+            },
             submitAdForm: function () {
                 this.adForm.errorTip = "";
                 //参数校验
@@ -335,8 +338,7 @@ $adData = ConfigData::getAdData();
                     }
                 });
             },
-
-	    submitChargeTypeForm: function () {
+	        submitChargeTypeForm: function () {
                 this.chargeTypeForm.errorTip = "处理中...";
                 var vm = this;
                 $.ajax({
@@ -360,41 +362,40 @@ $adData = ConfigData::getAdData();
                     }
                 });
             },
-
             //提交注册或登录
-	    submitLoginModal: function () {
-            if (this.loginModal.phone == "" || this.loginModal.pwd == "") {
-                this.loginModal.errorTip = "请输入手机号和密码";
-                return;
-            }
-
-            if (this.loginModal.isReg &&  (this.loginModal.pwd2 == "" || this.loginModal.pwd2 != this.loginModal.pwd)) {
-                this.loginModal.errorTip = "两次输入的密码不一致";
-                return;
-            }
-
-            this.loginModal.errorTip = "处理中...";
-            var vm = this;
-            $.ajax({
-                type: 'POST',
-                url: 'ajax/login.php',
-                xhrFields:{withCredentials: true},
-                crossDomain: true,
-                data: {"phone": vm.loginModal.phone, "pwd": vm.loginModal.pwd, "isReg": vm.loginModal.isReg},
-                dataType: 'json',
-                success: function(data) {
-                    if (data.succ) {
-                        //成功 已登录 跳转
-                        window.location.reload();
-                    }else {
-                        vm.loginModal.errorTip = data.retDesc;
-                    }
-                },
-                error: function () {
-                    vm.loginModal.errorTip = "处理失败,请重试!";
+	        submitLoginModal: function () {
+                if (this.loginModal.phone == "" || this.loginModal.pwd == "") {
+                    this.loginModal.errorTip = "请输入手机号和密码";
+                    return;
                 }
-            });
-        },
+
+                if (this.loginModal.isReg &&  (this.loginModal.pwd2 == "" || this.loginModal.pwd2 != this.loginModal.pwd)) {
+                    this.loginModal.errorTip = "两次输入的密码不一致";
+                    return;
+                }
+
+                this.loginModal.errorTip = "处理中...";
+                var vm = this;
+                $.ajax({
+                    type: 'POST',
+                    url: 'ajax/login.php',
+                    xhrFields:{withCredentials: true},
+                    crossDomain: true,
+                    data: {"phone": vm.loginModal.phone, "pwd": vm.loginModal.pwd, "isReg": vm.loginModal.isReg},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.succ) {
+                            //成功 已登录 跳转
+                            window.location.reload();
+                        }else {
+                            vm.loginModal.errorTip = data.retDesc;
+                        }
+                    },
+                    error: function () {
+                        vm.loginModal.errorTip = "处理失败,请重试!";
+                    }
+                });
+            },
             submitPwModal: function () {
                 if (this.pwModal.old_pwd === "" || this.pwModal.new_pw === "") {
                     this.pwModal.errorTip = "请输入参数";
@@ -427,6 +428,7 @@ $adData = ConfigData::getAdData();
             }
         }
     });
+    app.init();
 </script>
 </body>
 </html>
