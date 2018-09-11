@@ -168,7 +168,7 @@ $adData = ConfigData::getAdData();
                         </div>
                         <div class="form-group" v-if="loginModal.isReg">
                             <label for="password" class="control-label">确认密码:</label>
-                            <input type="password" class="form-control" id="password" v-model.trim="loginModal.pwd2">
+                            <input type="password" class="form-control" id="password2" v-model.trim="loginModal.pwd2">
                         </div>
                     </form>
                 </div>
