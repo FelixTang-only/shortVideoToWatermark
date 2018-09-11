@@ -1,0 +1,147 @@
+/*!
+ * site.css
+ * (c) 2015-2018 iiiLab.com
+ */
+body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;}
+.navbar-default {
+    background-color: #1baadb;
+    border-color: #1baadb;
+    background-image: linear-gradient(to right, #00b4aa, #1baadb);
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li:focus, .navbar-default .navbar-nav>li:hover {
+    background: #1e97bf;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.navbar-default .navbar-toggle {
+    background-color: #1baadb;
+    border-color: #fff;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #1e97bf;
+}
+
+.navbar-fixed-top .navbar-collapse {
+    max-height: 500px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 880px;
+    }
+}
+.btn-default {
+    color: #fff;
+    background-color: #1baadb;
+    border-color: #1e97bf;
+}
+.btn-default:hover, .btn-default:focus {
+    color: #fff;
+    background-color: #1e97bf;
+    border-color: #1e97bf;
+}
+.btn-default.disabled, .btn-default.disabled:focus, .btn-default.disabled:hover {
+    color: #bfcbd9;
+    cursor: not-allowed;
+    background-color: #eef1f6;
+    border-color: #d1dbe5;
+}
+.alert {
+    padding: 5px 15px;
+}
+
+p.alert-info {
+    margin:5px 0;
+    padding:5px 10px;
+    color: #000;
+    background-color: #eaedf3;
+    border-color: #dadee6;
+}
+
+[v-cloak] { display: none }
+
+.btn-success {
+    color: #fff;
+    background-color: #13ce66;
+    border-color: #13ce66;
+}
+
+.btn-success:focus, .btn-success:hover {
+    background: #42d885;
+    border-color: #42d885;
+    color: #fff;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #50bfff;
+    border-color: #50bfff;
+}
+
+.btn-info:focus, .btn-info:hover {
+    background: #73ccff;
+    border-color: #73ccff;
+    color: #fff;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #ff4949;
+    border-color: #ff4949;
+}
+
+.btn-danger:focus, .btn-danger:hover {
+    color: #fff;
+    background-color: #ff6d6d;
+    border-color: #ff6d6d;
+}
+
+.thumbnail {
+    background-color: #fdfdfd;
+}
+
+.thumbnail p{clear: both;}
+.thumbnail p .label{margin-right: 4px;margin-bottom: 4px;float: left;}
+.thumbnail p .btn-success{margin-right: 2px;margin-left: 2px;margin-bottom: 4px;}
+.thumbnail p .btn-info{margin-right: 2px;margin-left: 2px;margin-bottom: 4px;}
+
+.thumbnail p:last-child{margin-bottom: 5px;}
+
+
+.navbar-brand {
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+    .navbar>.container .navbar-brand {margin-left: 0;}
+}
+
+/** clear btn **/
+.link-input::-ms-clear { display: none; }
+.input-group-lg>.input-group-btn>.btn-clear {
+    position: absolute;
+    top: 0;
+    left: -35px;
+    width: 35px;
+    height: 45px;
+    background: url(http://static.iiilab.com/clear.png) no-repeat center;
+    z-index: 2;
+    -webkit-background-size: 18px;
+    background-size: 18px;
+    cursor: pointer;
+}
