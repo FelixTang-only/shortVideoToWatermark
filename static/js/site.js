@@ -198,7 +198,7 @@ var app = new Vue({
             //去掉前面的中文
             this.link = this.link.substr(startIndex);
 
-	    var endIndex = this.link.indexOf(" ");
+	        var endIndex = this.link.indexOf(" ");
             if (endIndex !== -1) {
                 this.link = this.link.substring(0, endIndex);
             }
@@ -224,6 +224,7 @@ var app = new Vue({
         parseVideo: function() {
             //服务端处理
             this.submitBtnClass.disabled = true;
+            this.requestSuccess = false;
             var vm = this;
             $.ajax({
                 type: 'POST',
