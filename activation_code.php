@@ -36,6 +36,7 @@ $statusArr = array(
             <a class="navbar-brand" href="/">激活码管理</a>
         </div>
 
+    <div class="navbar-collapse collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/">首页</a></li>
             <?php
@@ -48,6 +49,7 @@ $statusArr = array(
             <?php } ?>
         </ul>
     </div>
+</div>
 </div>
 <div class="container" id="app" style="margin-top: 70px;">
     <div class="row">

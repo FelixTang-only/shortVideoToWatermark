@@ -32,6 +32,7 @@ $adData = ConfigData::getAdData();
             <a class="navbar-brand" href="/">后台管理</a>
         </div>
 
+    <div class="navbar-collapse collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/">首页</a></li>
             <?php
@@ -45,6 +46,7 @@ $adData = ConfigData::getAdData();
             <?php } ?>
         </ul>
     </div>
+</div>
 </div>
 <div class="container" id="app" style="margin-top: 70px;">
     <div class="row">
