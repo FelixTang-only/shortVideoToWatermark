@@ -2,7 +2,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/site.css?v31" rel="stylesheet">
+    <link href="static/css/site.css?v32" rel="stylesheet">
     <link rel="shortcut icon" href="static/img/favicon.ico">
     <style type="text/css">
         .container .navbar-header .logo-img {
