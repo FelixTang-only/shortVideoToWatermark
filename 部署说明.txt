@@ -1,12 +1,13 @@
 1. 将 init.sql 导入mysql数据库中
 
-2. 在 class/DbConfig.php 中配置数据库信息
+2. 设置目录属性： ./config 目录需要可读写权限  Linux机器执行命令：chmod -R 755 config/
 
-3. 设置目录属性： ./config 目录需要可读写权限  Linux机器执行命令：chmod -R 777 config/
+3. 访问 http://abc.com/
+3. 在 class/DbConfig.php 中配置数据库信息
+
 
 
 管理员账号：13812345678  密码：123456
-
 
 如果部署的网站域名是 abc.com  且网站部署在根目录
 

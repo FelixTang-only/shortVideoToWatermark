@@ -25,7 +25,8 @@ CREATE TABLE `video_activation_code` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='激活码表';
 
 
-INSERT INTO video_user (phone, password, user_type, experience_used, vip_expire_time, last_login_session_id, add_time) VALUES ('13812345678', 'e10adc3949ba59abbe56e057f20f883e', 3, 0, null, null, 1524759425);
+INSERT INTO video_user (phone, password, user_type, experience_used, vip_expire_time, last_login_session_id, add_time)
+VALUES ('13812345678', 'e10adc3949ba59abbe56e057f20f883e', 3, 0, null, null, 1524759425);
 
 
 
