@@ -2,7 +2,7 @@
 
 2：设置目录属性： ./config 目录需要可读写权限  Linux机器执行命令：chmod -R 777 config/
 
-3: 访问install.php 即：http://您的网站/config/install.php
+3: 访问install.php 即：http://您的网站/config/install.php  进行安装
 
 
 安装过程中，需要填写数据库信息、iiiLab视频解析接口密钥信息；
