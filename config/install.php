@@ -217,7 +217,7 @@ if (isset($_POST['install'])) { //安装
                     <p><a href="../" class="btn btn-default">前往首页</a></p>
                 </div>
 
-                <p v-if="!isInit && initTip" style="color: red;font-size: 18px;text-align: center;margin-top: 20px;">{{initTip}}</p>
+                <p v-if="!isInit && initTip" style="color: red;font-size: 18px;text-align: center;margin-top: 20px;" v-html="initTip"></p>
 
             </div>
         </div>
