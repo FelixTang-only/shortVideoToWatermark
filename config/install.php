@@ -232,7 +232,7 @@ if (isset($_POST['install'])) { //安装
     var app = new Vue({
         el: '#app',
         data: {
-            installForm {
+            installForm: {
                 install: 'form',
                 databaseHost:'localhost',
                 databasePort:'3306',
