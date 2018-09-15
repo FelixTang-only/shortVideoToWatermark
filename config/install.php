@@ -23,7 +23,7 @@ if (isset($_GET['init'])) { //初始检测 基本检测
     }
 
     if (!is_writable(__DIR__) || !is_writable($dbconfig_file)) {
-        exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限，Linux机器执行命令：chmod -R 755 config/');
+        exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限<br>Linux机器执行命令：chmod -R 755 config/');
     }
 
     if (!function_exists("mysqli_connect")) {
@@ -217,7 +217,7 @@ if (isset($_POST['install'])) { //安装
                     <p><a href="../" class="btn btn-default">前往首页</a></p>
                 </div>
 
-                <p v-if="!isInit && initTip" style="color: red;font-size: 14px;text-align: center;">{{initTip}}</p>
+                <p v-if="!isInit && initTip" style="color: red;font-size: 18px;text-align: center;margin-top: 20px;">{{initTip}}</p>
 
             </div>
         </div>
