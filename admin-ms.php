@@ -114,7 +114,7 @@ $adData = ConfigData::getAdData();
                         <hr/>
 
 
-                        <h4>iiiLab视频解析接口密钥管理</h4>
+                        <h4>iiiLab视频解析接口密钥管理<small style="margin-left:5px;font-size: 70%;"><a href="http://www.iiilab.com/article/60" target="_blank">如何获取？</a></small></h4>
 
                         <div class="form-inline">
                             <div class="form-group">
