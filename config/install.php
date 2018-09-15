@@ -207,6 +207,18 @@ if (isset($_POST['install'])) { //安装
                         <label for="databasePassword">数据库密码</label>
                         <input type="password" v-model.trim="installForm.databasePassword" class="form-control" id="databasePassword" name="databasePassword" placeholder="请输入数据库用户密码" required="">
                     </div>
+
+                    <div class="form-group">
+                        <label for="clientId">iiiLab视频解析接口客户ID</label>
+                        <input type="text" v-model.trim="installForm.clientId" class="form-control" id="clientId" name="clientId" placeholder="请输入iiiLab视频解析接口clientId" required="">
+                        <p class="help-block">如果还没有，<a href="http://www.iiilab.com/article/60" target="_blank">前往iiiLab获取视频解析接口客户ID和密钥</a><p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientSecretKey">iiiLab视频解析接口密钥</label>
+                        <input type="text" v-model.trim="installForm.clientSecretKey" class="form-control" id="clientSecretKey" name="clientSecretKey" placeholder="请输入iiiLab视频解析接口clientSecretKey" required="">
+                    </div>
+
                     <button type="submit" class="btn btn-default" @click="submitInstallForm()">确认安装</button>
                     <span v-if="installForm.errorTip" style="color: red;font-size: 14px;">{{installForm.errorTip}}</span>
                 </div>
@@ -239,7 +251,9 @@ if (isset($_POST['install'])) { //安装
                 database:'video',
                 databaseUser:'',
                 databasePassword:'',
-                errorTip: ''
+                errorTip: '',
+                clientId: '',
+                clientSecretKey: ''
             },
             showInstallForm: true,
             isInit: false,
