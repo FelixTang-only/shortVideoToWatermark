@@ -25,7 +25,7 @@ if (isset($_GET['init'])) { //初始检测 基本检测
     }
 
     if (!is_writable(__DIR__) || !is_writable($dbconfig_file)) {
-        exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限<br>Linux机器执行命令：chmod -R 755 config/');
+        exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限<br>Linux机器执行命令：chmod -R 777 config/');
     }
 
     if (!function_exists("mysqli_connect")) {
