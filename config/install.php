@@ -146,7 +146,7 @@ if (isset($_POST['install'])) { //安装
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>后台管理</title>
+    <title>视频解析站点安装</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
