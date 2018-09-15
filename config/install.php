@@ -268,8 +268,10 @@ if (isset($_POST['install'])) { //安装
                     || this.installForm.databasePort === ''
                     || this.installForm.database === ''
                     || this.installForm.databaseUser === ''
-                    || this.installForm.databasePassword === '') {
-                    this.installForm.errorTip = "缺少数据库配置信息，所有项都为必填项";
+                    || this.installForm.databasePassword === ''
+                    || this.installForm.clientId === ''
+                    || this.installForm.clientSecretKey === '') {
+                    this.installForm.errorTip = "缺少配置信息，所有项都为必填项";
                     return;
                 }
 
