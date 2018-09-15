@@ -205,7 +205,7 @@ if (isset($_POST['install'])) { //安装
 
                     <div class="form-group">
                         <label for="databasePassword">数据库密码</label>
-                        <input type="password" v-model.trim="installForm.databasePassword" class="form-control" id="databasePassword" name="databasePassword" placeholder="数据库密码" required="">
+                        <input type="password" v-model.trim="installForm.databasePassword" class="form-control" id="databasePassword" name="databasePassword" placeholder="请输入数据库用户密码" required="">
                     </div>
                     <button type="submit" class="btn btn-default" @click="submitInstallForm()">确认安装</button>
                     <span v-if="installForm.errorTip" style="color: red;font-size: 14px;">{{installForm.errorTip}}</span>
