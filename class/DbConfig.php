@@ -1,6 +1,6 @@
 <?php
 require 'Db.php';
-require __DIR__ . '/../config/dbconfig.php';
+require '../config/dbconfig.php';
 Db::config( 'driver',   'mysql' );
 Db::config( 'host',     DB_HOST);  //数据库host
 Db::config( 'database', DB_NAME);   //数据库名称
