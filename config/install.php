@@ -187,7 +187,7 @@ if (isset($_POST['install'])) { //安装
 
 
                 <div v-cloak v-if="isInit && !showInstallForm" style="text-align: center;">
-                    <p style="color: red;font-size: 14px;">恭喜，安装成功！</p>
+                    <p style="color: red;font-size: 18px;">恭喜，安装成功！</p>
                     <p><a href="../" class="btn btn-default">前往首页</a></p>
                 </div>
 
