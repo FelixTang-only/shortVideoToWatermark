@@ -24,7 +24,7 @@ if (isset($_GET['init'])) { //初始检测 基本检测
         exit('已经安装 如果需要重新安装 请删除install.lock文件');
     }
 
-    if (!is_writable(__DIR__) || !is_writable($dbconfig_file)) {
+    if (!is_writable(__DIR__)) {
         exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限<br>Linux机器执行命令：chmod -R 777 config/');
     }
 
