@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL^E_NOTICE);
+error_reporting(E_ALL^E_NOTICE^E_WARNING);
 require '../config/ConfigData.php';
 
 function getErrno($errno)
