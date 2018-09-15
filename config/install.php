@@ -1,19 +1,4 @@
 <?php
-if (file_exists('install.lock')) {
-    exit('已经安装 如果需要重新安装 请删除install.lock文件');
-}
-
-$dbconfig_file = 'dbconfig.php';
-$dbtpl_file = 'dbtpl.php';
-
-if (!is_writable(__DIR__) || !is_writable($dbconfig_file)) {
-    exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限，Linux机器执行命令：chmod -R 755 config/');
-}
-
-if (!function_exists("mysqli_connect")) {
-    exit('mysqli没有启用,请找到php.ini 去掉mysqli前面的注释并重启web服务。<br>启用方法：删除extension=php_mysqli.dll前面的 ;');
-}
-
 function getErrno($errno)
 {
     if ($errno == 1044) {
@@ -28,6 +13,26 @@ function showError($db)
         exit("错误代码：<font color='red'>" . getErrno($db->errno) . "</font>；<br /> 错误信息：<font color='red'>{$db->error}</font>");
     }
 }
+
+$dbconfig_file = 'dbconfig.php';
+$dbtpl_file = 'dbtpl.php';
+
+if ($_GET['init']) { //初始检测 基本检测
+    if (file_exists('install.lock')) {
+        exit('已经安装 如果需要重新安装 请删除install.lock文件');
+    }
+
+    if (!is_writable(__DIR__) || !is_writable($dbconfig_file)) {
+        exit('config文件夹没有写入权限，请先给config文件夹设置可读写权限，Linux机器执行命令：chmod -R 755 config/');
+    }
+
+    if (!function_exists("mysqli_connect")) {
+        exit('mysqli没有启用,请找到php.ini 去掉mysqli前面的注释并重启web服务。<br>启用方法：删除extension=php_mysqli.dll前面的 ;');
+    }
+
+    exit('ok');
+}
+
 
 if ($_POST['install']) { //安装
     if (file_exists($dbtpl_file)) {
@@ -148,7 +153,7 @@ if ($_POST['install']) { //安装
 
             <div style="margin-bottom: 20px;">
 
-                <div v-if="showInstallForm">
+                <div v-cloak v-if="isInit && showInstallForm">
                     <div class="form-group">
                         <label for="databaseHost">数据库主机</label>
                         <input type="text" v-model.trim="installForm.databaseHost" class="form-control" id="databaseHost" name="databaseHost" placeholder="请输入数据库主机" required="">
@@ -181,10 +186,12 @@ if ($_POST['install']) { //安装
                 </div>
 
 
-                <div v-if="!showInstallForm" style="text-align: center;">
+                <div v-cloak v-if="isInit && !showInstallForm" style="text-align: center;">
                     <p style="color: red;font-size: 14px;">恭喜，安装成功！</p>
                     <p><a href="../" class="btn btn-default">前往首页</a></p>
                 </div>
+
+                <p v-if="!isInit && initTip" style="color: red;font-size: 14px;text-align: center;">{{initTip}}</p>
 
             </div>
         </div>
@@ -207,7 +214,9 @@ if ($_POST['install']) { //安装
                 databasePassword:'',
                 errorTip: ''
             },
-            showInstallForm: true
+            showInstallForm: true,
+            isInit: false,
+            initTip: '正在初始化安装程序...'
         },
         methods: {
             submitInstallForm: function () {
@@ -229,7 +238,7 @@ if ($_POST['install']) { //安装
                     type: 'POST',
                     url: 'install.php',
                     data: vm.installForm,
-                    dataType: 'json',
+                    dataType: 'text',
                     success: function(data) {
                         if (data === 'ok') {
                             vm.showInstallForm = false;
@@ -241,9 +250,28 @@ if ($_POST['install']) { //安装
                         vm.installForm.errorTip = "处理失败,请重试!";
                     }
                 });
+            },
+            init: function () {
+                var vm = this;
+                $.ajax({
+                    type: 'GET',
+                    url: 'install.php?init=1',
+                    dataType: 'text',
+                    success: function(data) {
+                        if (data === 'ok') {
+                            vm.isInit = true;
+                        }else {
+                            vm.initTip = data;
+                        }
+                    },
+                    error: function () {
+                        vm.initTip = "初始化失败";
+                    }
+                });
             }
         }
     });
+    app.init();
 </script>
 </body>
 </html>
