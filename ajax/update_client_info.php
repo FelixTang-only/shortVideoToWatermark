@@ -21,8 +21,8 @@ if (!isset($_POST['client']) || !isset($_POST['clientSecretKey'])) {
 $config = ConfigData::getConfigData();
 $config['iiiLab_client'] = trim($_POST['client']);
 $config['iiiLab_clientSecretKey'] = trim($_POST['clientSecretKey']);
-
 $ret = ConfigData::updateConfigData($config);
+
 if ($ret) {
         $result['succ'] = true;
         exit(json_encode($result));

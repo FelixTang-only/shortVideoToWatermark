@@ -1,4 +1,6 @@
 <?php
+require '../config/ConfigData.php';
+
 function getErrno($errno)
 {
     if ($errno == 1044) {
@@ -30,11 +32,21 @@ if (isset($_GET['init'])) { //初始检测 基本检测
         exit('mysqli没有启用,请找到php.ini 去掉mysqli前面的注释并重启web服务。<br>启用方法：删除extension=php_mysqli.dll前面的 ;');
     }
 
+    ConfigData::getConfigData();
+
     exit('ok');
 }
 
 
 if (isset($_POST['install'])) { //安装
+
+    //密钥配置
+    $config = ConfigData::getConfigData();
+    $config['iiiLab_client'] = trim($_POST['clientId']);
+    $config['iiiLab_clientSecretKey'] = trim($_POST['clientSecretKey']);
+    ConfigData::updateConfigData($config);
+
+
     if (file_exists($dbtpl_file)) {
         $fp = fopen($dbtpl_file, "r");
         $modeStr = fread($fp, filesize($dbtpl_file));//读取配置模板内容
