@@ -17,7 +17,7 @@ function showError($db)
 $dbconfig_file = 'dbconfig.php';
 $dbtpl_file = 'dbtpl.php';
 
-if ($_GET['init']) { //初始检测 基本检测
+if (isset($_GET['init'])) { //初始检测 基本检测
     if (file_exists('install.lock')) {
         exit('已经安装 如果需要重新安装 请删除install.lock文件');
     }
@@ -34,7 +34,7 @@ if ($_GET['init']) { //初始检测 基本检测
 }
 
 
-if ($_POST['install']) { //安装
+if (isset($_POST['install'])) { //安装
     if (file_exists($dbtpl_file)) {
         $fp = fopen($dbtpl_file, "r");
         $modeStr = fread($fp, filesize($dbtpl_file));//读取配置模板内容
@@ -207,6 +207,7 @@ if ($_POST['install']) { //安装
         el: '#app',
         data: {
             installForm {
+                install: 'form',
                 databaseHost:'localhost',
                 databasePort:'3306',
                 database:'video',
