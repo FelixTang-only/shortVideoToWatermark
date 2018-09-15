@@ -70,7 +70,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
 
             <div v-cloak v-if="errorTip" style="text-align: center;" class="alert alert-danger" role="alert">{{errorTip}}</div>
 
-            <div v-cloak v-if="submitBtnClass.disabled" style="text-align: center;"><img src="static/img/loading.gif" style="width: 50px;height: 50px;"></div>
+            <div v-cloak v-if="submitBtnClass.disabled" style="text-align: center;"><img src="http://img1.iiilab.com/static/loading.gif" style="width: 50px;height: 50px;"></div>
 
             <div v-cloak v-if="isMP4File">
                 <div class="thumbnail">
