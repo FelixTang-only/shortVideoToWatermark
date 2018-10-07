@@ -1,3 +1,6 @@
+安装所需环境：Linux + PHP + Mysql
+
+
 1：上传此文件夹全部文件到您网站的根目录
 
 2：设置目录属性： ./config 目录需要可读写权限  Linux机器执行命令：chmod -R 777 config/
