@@ -21,7 +21,7 @@ if (empty($_POST['phone']) || empty($_POST['pwd']) || empty($_POST['isReg'])) {
 }
 
 if (!is_numeric($_POST['phone'])) {
-    $result['retDesc'] = "手机号格式错误";
+    $result['retDesc'] = "账号格式错误";
     exit(json_encode($result));
 }
 
@@ -35,7 +35,7 @@ $ret = $db->select('video_user', '*', array (
 
 if ($_POST['isReg'] != "false") {
     if ($ret) {
-        $result['retDesc'] = "手机号已存在";
+        $result['retDesc'] = "账号已存在";
         exit(json_encode($result));
     }
 
@@ -53,7 +53,7 @@ if ($_POST['isReg'] != "false") {
     ))->fetch(false);
 }else {
     if (!$ret) {
-        $result['retDesc'] = "手机号不存在";
+        $result['retDesc'] = "账号不存在";
         exit(json_encode($result));
     }
 

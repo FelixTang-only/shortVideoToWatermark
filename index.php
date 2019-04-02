@@ -8,6 +8,10 @@ $adData = json_decode(ConfigData::getAdData(), true);
 <html lang="zh">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
     <title>全网视频解析下载</title>
      <?php include_once "meta.php"; ?>
 </head>
@@ -15,7 +19,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
 
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header"">
+        <div class="navbar-header">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -28,7 +32,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav navbar-right">
                 <?php if ($config['chargeType'] == 1) { ?>
-                    <li><a href="javascript:$('#activationModal').modal('show');">激活VIP</a></li>
+                    <li><a href="javascript:$('#activationModal').modal('show');"><?php if(!empty($_SESSION['user']['number_of_use']) && $_SESSION['user']['number_of_use'] > 0) {echo '续期VIP';} else { echo '激活VIP';} ?></a></li>
                 <?php } ?>
                 <?php
                  if (empty($_SESSION['user']['phone'])) {
@@ -164,7 +168,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="phone" class="control-label">手机号:</label>
+                            <label for="phone" class="control-label">账号:</label>
                             <input type="text" class="form-control" id="phone" v-model.trim="loginModal.phone">
                         </div>
                         <div class="form-group">
@@ -194,17 +198,19 @@ $adData = json_decode(ConfigData::getAdData(), true);
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">激活VIP</h4>
+                    <h4 class="modal-title" id="exampleModalLabel"><?php if(!empty($_SESSION['user']['number_of_use']) && $_SESSION['user']['number_of_use'] > 0) {echo '续期VIP';} else { echo '激活VIP';} ?></h4>
                 </div>
 
                 <div class="modal-body">
                     <label>激活码购买</label>
                     <ul>
-                        <li>客服QQ：162385</li>
-                        <li>天卡  <a href="http://www.baidu.com" target="_blank">点击购买</a></li>
-                        <li>50元/月 包月价</li>
-                        <li>500元/年 单人包年价</li>
-                        <li>2000元/年 团队包年价（支持多人登陆）</li>
+                        <li>联系客服微信：w881133w</li>
+                        <!-- <li>天卡  <a href="http://www.baidu.com" target="_blank">点击购买</a></li> -->
+                        <li>15次/5元</li>
+                        <li>40次/10元</li>
+                        <li>180次/38元</li>
+                        <li>500次/58元</li>
+                        <li>2000次/168元</li>
                     </ul>
 
                     <form>
@@ -238,8 +244,9 @@ $adData = json_decode(ConfigData::getAdData(), true);
                 </div>
 
                 <div class="modal-body">
-                    <h5>手机号：<?php echo $_SESSION['user']['phone']; ?></h5>
-                    <h5>VIP到期时间：<?php if(empty($_SESSION['user']['vip_expire_time'])) { echo "未激活"; } else { echo dateFormat($_SESSION['user']['vip_expire_time']); } ?></h5>
+                    <h5>账号：<?php echo $_SESSION['user']['phone']; ?></h5>
+                    <!-- <h5>VIP到期时间：<?php if(empty($_SESSION['user']['vip_expire_time'])) { echo "未激活"; } else { echo dateFormat($_SESSION['user']['vip_expire_time']); } ?></h5> -->
+                    <h5>VIP剩余使用次数：<?php if(empty($_SESSION['user']['number_of_use'])) { echo "未激活"; } else { echo $_SESSION['user']['number_of_use']; } ?></h5>
                     <h5>用户类型：<?php echo $userType[$_SESSION['user']['user_type']]; ?></h5>
                 </div>
                 <div class="modal-footer">

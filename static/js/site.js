@@ -54,8 +54,13 @@ var app = new Vue({
             errorTip: ''
         },
         activationCode:{
-            num: '',
-            type: '',
+            num: '1',
+            type: '1',
+            errorTip: ''
+        },
+        activationSearchCode:{
+            type: '1',
+            status: '未兑换',
             errorTip: ''
         }
     },
@@ -71,6 +76,40 @@ var app = new Vue({
         }
     },
     methods: {
+        submitactivationSearchCodeForm: function () {
+            if (this.activationSearchCode.status == "" || this.activationSearchCode.type == "") {
+                this.activationSearchCode.errorTip = "请输入参数";
+                return;
+            }
+
+            this.activationSearchCode.errorTip = "处理中...";
+            var vm = this;
+            var status = '';
+            vm.activationSearchCode.status === '已兑换' ? status = '2' : status = '1';
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/generate_activation.php',
+                xhrFields:{withCredentials: true},
+                crossDomain: true,
+                data: {
+                    "type": vm.activationSearchCode.type,
+                    "status": status,
+                    "state": "search"
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.succ) {
+                        //成功 已登录 跳转
+                        window.location.href = window.location.origin + "/activation_code.php";
+                    }else {
+                        vm.activationSearchCode.errorTip = data.retDesc;
+                    }
+                },
+                error: function () {
+                    vm.activationSearchCode.errorTip = "处理失败,请重试!";
+                }
+            });
+        },
         submitActivationCodeForm: function () {
             if (this.activationCode.num == "" || this.activationCode.type == "") {
                 this.activationCode.errorTip = "请输入参数";
@@ -84,7 +123,11 @@ var app = new Vue({
                 url: 'ajax/generate_activation.php',
                 xhrFields:{withCredentials: true},
                 crossDomain: true,
-                data: {"type": vm.activationCode.type, "num": vm.activationCode.num},
+                data: {
+                    "type": vm.activationCode.type,
+                    "num": vm.activationCode.num,
+                    "state": "commit"
+                },
                 dataType: 'json',
                 success: function(data) {
                     if (data.succ) {
@@ -147,7 +190,7 @@ var app = new Vue({
         //提交注册或登录
         submitLoginModal: function () {
             if (this.loginModal.phone == "" || this.loginModal.pwd == "") {
-                this.loginModal.errorTip = "请输入手机号和密码";
+                this.loginModal.errorTip = "请输入账号和密码";
                 return;
             }
 
@@ -240,6 +283,13 @@ var app = new Vue({
                         vm.requestSuccess = true;
                     }else {
                         vm.errorTip = data.retDesc;
+                        if (typeof data.retErrorcode !== 'undefined') {
+                            if (data.retErrorcode === 2) {
+                                window.setTimeout(function() {
+                                    $('#activationModal').modal('show');
+                                }, 1000);
+                            }
+                        }
                     }
                 },
                 error: function () {

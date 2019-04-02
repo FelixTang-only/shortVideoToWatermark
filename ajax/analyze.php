@@ -28,15 +28,29 @@ if ($config['chargeType'] == 1) {
         }
         $result['retDesc'] = "用户未登录，请先登录或注册";
         exit(json_encode($result));
-    }
+    } 
 
-    if (empty($_SESSION['user']['vip_expire_time']) && $_SESSION['user']['experience_used'] >= 1) {
+    // if (empty($_SESSION['user']['vip_expire_time']) && $_SESSION['user']['experience_used'] >= 1) {
+    //     $result['retDesc'] = "免费体验次数已用尽，请激活VIP";
+    //     $result['retCode'] = 2;
+    //     exit(json_encode($result));
+    // }
+
+    if (empty($_SESSION['user']['number_of_use']) && $_SESSION['user']['experience_used'] >= 1) {
         $result['retDesc'] = "免费体验次数已用尽，请激活VIP";
+        $result['retErrorcode'] = 2;
         exit(json_encode($result));
     }
 
-    if (!empty($_SESSION['user']['vip_expire_time']) && time() > $_SESSION['user']['vip_expire_time']) {
-        $result['retDesc'] = "VIP已过期，请激活VIP";
+    // if (!empty($_SESSION['user']['vip_expire_time']) && time() > $_SESSION['user']['vip_expire_time']) {
+    //     $result['retDesc'] = "VIP已过期，请激活VIP";
+    //     $result['retCode'] = 2;
+    //     exit(json_encode($result));
+    // }
+
+    if (!empty($_SESSION['user']['number_of_use']) && $_SESSION['user']['number_of_use'] <= 0) {
+        $result['retDesc'] = "VIP使用次数已用完，请激活VIP";
+        $result['retErrorcode'] = 2;
         exit(json_encode($result));
     }
 }
@@ -49,7 +63,7 @@ if (empty($_POST['link'])) {
 
 //判断是否已配置接口密钥
 if (empty($config['iiiLab_client']) || empty($config['iiiLab_clientSecretKey'])) {
-    $result['retDesc'] = "缺少配置信息:解析接口密钥，请联系站长";
+    $result['retDesc'] = "缺少配置信息:解析接口密钥，请联系客服";
     exit(json_encode($result));
 }
 
@@ -83,10 +97,20 @@ $result = file_get_contents($iiiLabVideoDownloadURL, false, stream_context_creat
 //收费模式
 if ($config['chargeType'] == 1) {
     //如果是体验 计数
-    if (empty($_SESSION['user']['vip_expire_time'])) {
+    // if (empty($_SESSION['user']['vip_expire_time'])) {
+    //     $_SESSION['user']['experience_used'] = $_SESSION['user']['experience_used'] + 1;
+    //     $db = Db::instance();
+    //     $db->update( 'video_user', 'experience_used', $_SESSION['user']['experience_used'], $_SESSION['user']['id'] );
+    // }
+    if (empty($_SESSION['user']['number_of_use'])) {
         $_SESSION['user']['experience_used'] = $_SESSION['user']['experience_used'] + 1;
         $db = Db::instance();
         $db->update( 'video_user', 'experience_used', $_SESSION['user']['experience_used'], $_SESSION['user']['id'] );
+    }
+    if (!empty($_SESSION['user']['number_of_use']) && $_SESSION['user']['experience_used'] >= 1) {
+        $_SESSION['user']['number_of_use'] = $_SESSION['user']['number_of_use'] - 1;
+        $db = Db::instance();
+        $db->update( 'video_user', 'number_of_use', $_SESSION['user']['number_of_use'], $_SESSION['user']['id'] );
     }
 }
 
