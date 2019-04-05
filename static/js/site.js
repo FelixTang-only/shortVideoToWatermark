@@ -80,6 +80,7 @@ var app = new Vue({
             var ua = navigator.userAgent.toLowerCase();
             return ua.match(/MicroMessenger/i) == "micromessenger";
         };
+        alert(isWeixin());
         if (isWeixin()) {
            this.wxSubmitLoginModal();
         }
