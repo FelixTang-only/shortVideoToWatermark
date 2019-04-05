@@ -80,12 +80,12 @@ var app = new Vue({
             var ua = navigator.userAgent.toLowerCase();
             return ua.match(/MicroMessenger/i) == "micromessenger";
         };
-        if (isWeixin()) {
-           var nickname =  location.href.split('nickname=')[1];
-           if (typeof sessionStorage.getItem('loginStatus') !== 'undefined'){
-            if (!sessionStorage.getItem('loginStatus')) return;
-            this.wxSubmitLoginModal(nickname);
-           }
+        if (isWeixin() && typeof sessionStorage.getItem('loginStatus') === 'undefined') {
+            var nickname = location.href.split('nickname=')[1];
+            var img = location.href.split('userImg=')[1];
+            if (!sessionStorage.getItem('loginStatus')) {
+                this.wxSubmitLoginModal(nickname);
+            }
         }
     },
     methods: {
