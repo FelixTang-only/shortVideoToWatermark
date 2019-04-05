@@ -81,7 +81,7 @@ var app = new Vue({
             return ua.match(/MicroMessenger/i) == "micromessenger";
         };
         if (isWeixin() && sessionStorage.getItem("loginStatus") == null) {
-            var nickname = location.href.split('nickname=')[1];
+            var nickname = location.href.split('nickname=')[1].split('&&')[0];
             this.wxSubmitLoginModal(nickname);
         }
     },
