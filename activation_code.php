@@ -2,10 +2,11 @@
 include_once "page_common.php";
 
 $typeArr = array(
-    1 => '1天',
-    2 => '30天',
-    3 => '单人365天',
-    4 => '团队365天'
+    1 => '15次',
+    2 => '40次',
+    3 => '180次',
+    4 => '500次',
+    5 => '2000次',
 );
 
 $statusArr = array(
@@ -44,7 +45,7 @@ $statusArr = array(
             ?>
                  <li><a href="javascript:$('#loginModal').modal('show');">登录/注册</a></li>
              <?php } else { ?>
-            	 <li><a href="/admin-ms.php">后台管理</a></li>
+            	 <li><a href="/admin-ds.php">后台管理</a></li>
                  <li><a href="javascript:$('#userModal').modal('show');"><?php echo addAsterisk($_SESSION['user']['phone']); ?></a></li>
             <?php } ?>
         </ul>
@@ -82,6 +83,24 @@ $statusArr = array(
                             <p v-if="activationCode.errorTip" style="color: red;font-size: 14px;">{{activationCode.errorTip}}</p>
                             <button type="button" class="btn btn-default" @click="submitActivationCodeForm()">生成</button>
                         </div>
+                        <!-- <h4>兑换情况查询</h4>
+
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="">类型</label>
+                                <select v-model.trim="activationSearchCode.type" class="form-control">
+                                    <?php foreach ($typeArr as $k => $v) { ?>
+                                    <option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">兑换状态</label>
+                                <input v-model.trim="activationSearchCode.status" type="text" class="form-control" value="未兑换">
+                            </div>
+                            <p v-if="activationSearchCode.errorTip" style="color: red;font-size: 14px;">{{activationSearchCode.errorTip}}</p>
+                            <button type="button" class="btn btn-default" @click="submitactivationSearchCodeForm()">搜索</button>
+                        </div> -->
 
                             <?php
                             //列表查询
@@ -188,7 +207,7 @@ LIMIT '. $offset .','. $pageSize)->all(false);
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="phone" class="control-label">手机号:</label>
+                            <label for="phone" class="control-label">账号:</label>
                             <input type="text" class="form-control" id="phone" v-model.trim="loginModal.phone">
                         </div>
                         <div class="form-group">
@@ -221,8 +240,9 @@ LIMIT '. $offset .','. $pageSize)->all(false);
                 </div>
 
                 <div class="modal-body">
-                    <h5>手机号：<?php echo $_SESSION['user']['phone']; ?></h5>
-                    <h5>VIP到期时间：<?php if(empty($_SESSION['user']['vip_expire_time'])) { echo "未激活"; } else { echo  dateFormat($_SESSION['user']['vip_expire_time']); } ?></h5>
+                    <h5>账号：<?php echo $_SESSION['user']['phone']; ?></h5>
+                    <!-- <h5>VIP到期时间：<?php if(empty($_SESSION['user']['vip_expire_time'])) { echo "未激活"; } else { echo  dateFormat($_SESSION['user']['vip_expire_time']); } ?></h5> -->
+                    <h5>VIP剩余使用次数：<?php if(empty($_SESSION['user']['number_of_use'])) { echo "未激活"; } else { echo  $_SESSION['user']['number_of_use']; } ?></h5>
                     <h5>用户类型：<?php echo $userType[$_SESSION['user']['user_type']]; ?></h5>
                 </div>
                 <div class="modal-footer">

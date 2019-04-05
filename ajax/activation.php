@@ -34,22 +34,43 @@ if ($ret['status'] != 1) {
 //计算到时时间
 $dayTime = 3600 * 24;
 $userType = 1;
+// switch ($ret['type']) {
+//     case 1:
+//         $validTime = $dayTime;
+//         break;
+//     case 2:
+//         $validTime = 30 * $dayTime;
+//         break;
+//     case 3:
+//         $validTime = 365 * $dayTime;
+//         break;
+//     case 4:
+//         $validTime = 365 * $dayTime;
+//         $userType = 2;
+//         break;
+//     default:
+//         $validTime = $dayTime;
+// }
 switch ($ret['type']) {
     case 1:
-        $validTime = $dayTime;
+        $numberofuser = 15;
         break;
     case 2:
-        $validTime = 30 * $dayTime;
+        $numberofuser = 40;
         break;
     case 3:
-        $validTime = 365 * $dayTime;
+        $numberofuser = 180;
         break;
     case 4:
-        $validTime = 365 * $dayTime;
+        $numberofuser = 500;
+        $userType = 2;
+        break;
+    case 4:
+        $numberofuser = 2000;
         $userType = 2;
         break;
     default:
-        $validTime = $dayTime;
+        $numberofuser = 15;
 }
 
 if ($_SESSION['user']['user_type'] != 3) {
@@ -57,14 +78,23 @@ if ($_SESSION['user']['user_type'] != 3) {
 }
 
 
-if (!empty($_SESSION['user']['vip_expire_time']) && $_SESSION['user']['vip_expire_time'] > time()) {
-    $_SESSION['user']['vip_expire_time'] = $_SESSION['user']['vip_expire_time'] + $validTime;
+// if (!empty($_SESSION['user']['vip_expire_time']) && $_SESSION['user']['vip_expire_time'] > time()) {
+//     $_SESSION['user']['vip_expire_time'] = $_SESSION['user']['vip_expire_time'] + $validTime;
+// }else{
+//     $_SESSION['user']['vip_expire_time'] = time() + $validTime;
+// }
+
+if (!empty($_SESSION['user']['number_of_use']) && $_SESSION['user']['number_of_use'] > 0) {
+    $_SESSION['user']['number_of_use'] = $_SESSION['user']['number_of_use'] + $numberofuser;
 }else{
-    $_SESSION['user']['vip_expire_time'] = time() + $validTime;
+    $_SESSION['user']['number_of_use'] = $numberofuser;
 }
 
 //更新用户信息
-$db->raw( "UPDATE video_user set user_type = ".$_SESSION['user']['user_type'].", vip_expire_time = ".$_SESSION['user']['vip_expire_time']." 
+// $db->raw( "UPDATE video_user set user_type = ".$_SESSION['user']['user_type'].", vip_expire_time = ".$_SESSION['user']['vip_expire_time']." 
+// where phone = '". $_SESSION['user']['phone']."'" );
+
+$db->raw( "UPDATE video_user set user_type = ".$_SESSION['user']['user_type'].", number_of_use = ".$_SESSION['user']['number_of_use']." 
 where phone = '". $_SESSION['user']['phone']."'" );
 
 
