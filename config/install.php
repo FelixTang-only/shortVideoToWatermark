@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL^E_NOTICE^E_WARNING);
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 require '../config/ConfigData.php';
 
 function getErrno($errno)
@@ -50,7 +50,7 @@ if (isset($_POST['install'])) { //安装
 
     if (file_exists($dbtpl_file)) {
         $fp = fopen($dbtpl_file, "r");
-        $modeStr = fread($fp, filesize($dbtpl_file));//读取配置模板内容
+        $modeStr = fread($fp, filesize($dbtpl_file)); //读取配置模板内容
     } else {
         exit('dbtpl.php文件不存在 该文件为系统模板请重新下载');
     }
@@ -60,7 +60,7 @@ if (isset($_POST['install'])) { //安装
     $database = $_POST['database'];
     $databaseUser = $_POST['databaseUser'];
     $databasePassword = $_POST['databasePassword'];
-  
+
     $_mysqli = @new mysqli($databaseHost, $databaseUser, $databasePassword, '', $databasePort);
     if (mysqli_connect_errno()) {
         exit('数据库连接错误！错误代码：' . mysqli_connect_error());
@@ -77,6 +77,7 @@ if (isset($_POST['install'])) { //安装
       `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
       `phone` varchar(16) NOT NULL COMMENT '账号',
       `password` char(32) NOT NULL COMMENT '密码',
+      `headimg` varchar(100) NOT NULL COMMENT '头像',
       `user_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:单人用户 2:团队用户 3:管理员',
       `experience_used` int(11) NOT NULL DEFAULT '0' COMMENT '已使用的免费体验次数',
       `vip_expire_time` int(11) DEFAULT NULL COMMENT '会员过期时间,如果为空则从未充值',
@@ -108,7 +109,7 @@ if (isset($_POST['install'])) { //安装
     VALUES ('1057742284', 'e10adc3949ba59abbe56e057f20f883e', 3, 0, null, 10000000, null, 1524759425);");
 
     $data = array("数据库IP地址" => $databaseHost, "MYSQL端口" => $databasePort, "MYSQL数据库" => $database, "MYSQL用户名" => $databaseUser, "MYSQL密码" => $databasePassword);
-   
+
 
     function get_value($key)
     {
@@ -116,19 +117,24 @@ if (isset($_POST['install'])) { //安装
         return "'" . $data[$key] . "'";
     }
 
-      function mat($matches){return get_value($matches[1]);}
+    function mat($matches)
+    {
+        return get_value($matches[1]);
+    }
 
-      if(function_exists('preg_replace_callback')){
-          $configString = preg_replace_callback(
-                '/\"([^\"]*)\"/', mat
-                , $modeStr);
-      }else{
-          $configString = preg_replace(
-          '/\"([^\"]*)\"/es',
-          "get_value('\\1')",
-          $modeStr
-          );
-      }
+    if (function_exists('preg_replace_callback')) {
+        $configString = preg_replace_callback(
+            '/\"([^\"]*)\"/',
+            mat,
+            $modeStr
+        );
+    } else {
+        $configString = preg_replace(
+            '/\"([^\"]*)\"/es',
+            "get_value('\\1')",
+            $modeStr
+        );
+    }
 
 
     if ($configString == '') {
@@ -147,6 +153,7 @@ if (isset($_POST['install'])) { //安装
 ?>
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="utf-8">
     <title>视频解析站点安装</title>
@@ -168,8 +175,11 @@ if (isset($_POST['install'])) { //安装
             background: 0 0\9;
             filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../static/img/logo.png', sizingMethod='scale');
         }
+
         @media (min-width: 768px) {
-            .container .navbar-header .logo-img {margin-left: 0;}
+            .container .navbar-header .logo-img {
+                margin-left: 0;
+            }
         }
     </style>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -178,158 +188,161 @@ if (isset($_POST['install'])) { //安装
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <span class="logo-img"></span>
-            <a class="navbar-brand" href="/">视频解析站点安装</a>
-        </div>
-    </div>
-</div>
-<div class="container" id="app" style="margin-top: 70px;">
-    <div class="row">
-        <div class="col-md-12">
-
-            <div style="margin-bottom: 20px;">
-
-                <div v-cloak v-if="isInit && showInstallForm">
-                    <div class="form-group">
-                        <label for="databaseHost">数据库主机</label>
-                        <input type="text" v-model.trim="installForm.databaseHost" class="form-control" id="databaseHost" name="databaseHost" placeholder="请输入数据库主机" required="">
-                        <p class="help-block">如果数据库与网站是同一台服务器，默认 localhost 即可</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="databasePort">数据库端口</label>
-                        <input type="number" min="0" max="65535" v-model.trim="installForm.databasePort" class="form-control" id="databasePort" name="databasePort" placeholder="请输入数据库端口" required="">
-                        <p class="help-block">如果没有修改过数据库端口，默认 3306 即可</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="database">数据库名</label>
-                        <input type="text" v-model.trim="installForm.database" class="form-control" id="database" name="database" placeholder="请输入数据库名" required="">
-                        <p class="help-block">如果数据库不存在，系统会以您指定的名称创建一个数据库</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="databaseUser">数据库用户名</label>
-                        <input type="text" v-model.trim="installForm.databaseUser" class="form-control" id="databaseUser" name="databaseUser" placeholder="请输入数据库用户名" required="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="databasePassword">数据库密码</label>
-                        <input type="password" v-model.trim="installForm.databasePassword" class="form-control" id="databasePassword" name="databasePassword" placeholder="请输入数据库用户密码" required="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="clientId">iiiLab视频解析接口客户ID</label>
-                        <input type="text" v-model.trim="installForm.clientId" class="form-control" id="clientId" name="clientId" placeholder="请输入iiiLab视频解析接口clientId" required="">
-                        <p class="help-block">如果还没有，<a href="http://www.iiilab.com/article/60" target="_blank">前往iiiLab获取视频解析接口客户ID和密钥</a><p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="clientSecretKey">iiiLab视频解析接口密钥</label>
-                        <input type="text" v-model.trim="installForm.clientSecretKey" class="form-control" id="clientSecretKey" name="clientSecretKey" placeholder="请输入iiiLab视频解析接口clientSecretKey" required="">
-                    </div>
-
-                    <button type="submit" class="btn btn-default" @click="submitInstallForm()">确认安装</button>
-                    <span v-if="installForm.errorTip" style="color: red;font-size: 14px;">{{installForm.errorTip}}</span>
-                </div>
-
-
-                <div v-cloak v-if="isInit && !showInstallForm" style="text-align: center;">
-                    <p style="color: red;font-size: 18px;">恭喜，安装成功！</p>
-                    <p><a href="../" class="btn btn-default">前往首页</a></p>
-                </div>
-
-                <p v-if="!isInit && initTip" style="color: red;font-size: 18px;text-align: center;margin-top: 20px;" v-html="initTip"></p>
-
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="logo-img"></span>
+                <a class="navbar-brand" href="/">视频解析站点安装</a>
             </div>
         </div>
     </div>
+    <div class="container" id="app" style="margin-top: 70px;">
+        <div class="row">
+            <div class="col-md-12">
 
-</div>
+                <div style="margin-bottom: 20px;">
 
-<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="../static/js/vue.min.js"></script>
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            installForm: {
-                install: 'form',
-                databaseHost:'localhost',
-                databasePort:'3306',
-                database:'video',
-                databaseUser:'',
-                databasePassword:'',
-                errorTip: '',
-                clientId: '',
-                clientSecretKey: ''
+                    <div v-cloak v-if="isInit && showInstallForm">
+                        <div class="form-group">
+                            <label for="databaseHost">数据库主机</label>
+                            <input type="text" v-model.trim="installForm.databaseHost" class="form-control" id="databaseHost" name="databaseHost" placeholder="请输入数据库主机" required="">
+                            <p class="help-block">如果数据库与网站是同一台服务器，默认 localhost 即可</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="databasePort">数据库端口</label>
+                            <input type="number" min="0" max="65535" v-model.trim="installForm.databasePort" class="form-control" id="databasePort" name="databasePort" placeholder="请输入数据库端口" required="">
+                            <p class="help-block">如果没有修改过数据库端口，默认 3306 即可</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="database">数据库名</label>
+                            <input type="text" v-model.trim="installForm.database" class="form-control" id="database" name="database" placeholder="请输入数据库名" required="">
+                            <p class="help-block">如果数据库不存在，系统会以您指定的名称创建一个数据库</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="databaseUser">数据库用户名</label>
+                            <input type="text" v-model.trim="installForm.databaseUser" class="form-control" id="databaseUser" name="databaseUser" placeholder="请输入数据库用户名" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="databasePassword">数据库密码</label>
+                            <input type="password" v-model.trim="installForm.databasePassword" class="form-control" id="databasePassword" name="databasePassword" placeholder="请输入数据库用户密码" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientId">iiiLab视频解析接口客户ID</label>
+                            <input type="text" v-model.trim="installForm.clientId" class="form-control" id="clientId" name="clientId" placeholder="请输入iiiLab视频解析接口clientId" required="">
+                            <p class="help-block">如果还没有，<a href="http://www.iiilab.com/article/60" target="_blank">前往iiiLab获取视频解析接口客户ID和密钥</a>
+                                <p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientSecretKey">iiiLab视频解析接口密钥</label>
+                            <input type="text" v-model.trim="installForm.clientSecretKey" class="form-control" id="clientSecretKey" name="clientSecretKey" placeholder="请输入iiiLab视频解析接口clientSecretKey" required="">
+                        </div>
+
+                        <button type="submit" class="btn btn-default" @click="submitInstallForm()">确认安装</button>
+                        <span v-if="installForm.errorTip" style="color: red;font-size: 14px;">{{installForm.errorTip}}</span>
+                    </div>
+
+
+                    <div v-cloak v-if="isInit && !showInstallForm" style="text-align: center;">
+                        <p style="color: red;font-size: 18px;">恭喜，安装成功！</p>
+                        <p><a href="../" class="btn btn-default">前往首页</a></p>
+                    </div>
+
+                    <p v-if="!isInit && initTip" style="color: red;font-size: 18px;text-align: center;margin-top: 20px;" v-html="initTip"></p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="../static/js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                installForm: {
+                    install: 'form',
+                    databaseHost: 'localhost',
+                    databasePort: '3306',
+                    database: 'video',
+                    databaseUser: '',
+                    databasePassword: '',
+                    errorTip: '',
+                    clientId: '',
+                    clientSecretKey: ''
+                },
+                showInstallForm: true,
+                isInit: false,
+                initTip: '正在初始化安装程序...'
             },
-            showInstallForm: true,
-            isInit: false,
-            initTip: '正在初始化安装程序...'
-        },
-        methods: {
-            submitInstallForm: function () {
-                this.installForm.errorTip = "";
+            methods: {
+                submitInstallForm: function() {
+                    this.installForm.errorTip = "";
 
-                //参数校验
-                if (this.installForm.databaseHost === ''
-                    || this.installForm.databasePort === ''
-                    || this.installForm.database === ''
-                    || this.installForm.databaseUser === ''
-                    || this.installForm.databasePassword === ''
-                    || this.installForm.clientId === ''
-                    || this.installForm.clientSecretKey === '') {
-                    this.installForm.errorTip = "缺少配置信息，所有项都为必填项";
-                    return;
+                    //参数校验
+                    if (this.installForm.databaseHost === '' ||
+                        this.installForm.databasePort === '' ||
+                        this.installForm.database === '' ||
+                        this.installForm.databaseUser === '' ||
+                        this.installForm.databasePassword === '' ||
+                        this.installForm.clientId === '' ||
+                        this.installForm.clientSecretKey === '') {
+                        this.installForm.errorTip = "缺少配置信息，所有项都为必填项";
+                        return;
+                    }
+
+                    this.installForm.errorTip = "安装中...";
+                    var vm = this;
+                    $.ajax({
+                        type: 'POST',
+                        url: 'install.php',
+                        data: vm.installForm,
+                        dataType: 'text',
+                        success: function(data) {
+                            if (data === 'ok') {
+                                vm.showInstallForm = false;
+                            } else {
+                                vm.installForm.errorTip = data;
+                            }
+                        },
+                        error: function() {
+                            vm.installForm.errorTip = "处理失败,请重试!";
+                        }
+                    });
+                },
+                init: function() {
+                    var vm = this;
+                    $.ajax({
+                        type: 'GET',
+                        url: 'install.php?init=1',
+                        dataType: 'text',
+                        success: function(data) {
+                            if (data === 'ok') {
+                                vm.isInit = true;
+                            } else {
+                                vm.initTip = data;
+                            }
+                        },
+                        error: function() {
+                            vm.initTip = "初始化失败";
+                        }
+                    });
                 }
-
-                this.installForm.errorTip = "安装中...";
-                var vm = this;
-                $.ajax({
-                    type: 'POST',
-                    url: 'install.php',
-                    data: vm.installForm,
-                    dataType: 'text',
-                    success: function(data) {
-                        if (data === 'ok') {
-                            vm.showInstallForm = false;
-                        }else {
-                            vm.installForm.errorTip = data;
-                        }
-                    },
-                    error: function () {
-                        vm.installForm.errorTip = "处理失败,请重试!";
-                    }
-                });
-            },
-            init: function () {
-                var vm = this;
-                $.ajax({
-                    type: 'GET',
-                    url: 'install.php?init=1',
-                    dataType: 'text',
-                    success: function(data) {
-                        if (data === 'ok') {
-                            vm.isInit = true;
-                        }else {
-                            vm.initTip = data;
-                        }
-                    },
-                    error: function () {
-                        vm.initTip = "初始化失败";
-                    }
-                });
             }
-        }
-    });
-    app.init();
-</script>
+        });
+        app.init();
+    </script>
 </body>
+
 </html>
