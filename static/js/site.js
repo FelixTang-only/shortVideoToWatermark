@@ -245,7 +245,8 @@ var app = new Vue({
                         //成功 已登录 跳转
                         var name = data.nickname;
                         var psw = data.nickname;
-                        this.backLogin(name, psw);
+                        alert(data);
+                        vm.backLogin(name, psw);
                     } else {
                         vm.loginModal.errorTip = data.retDesc;
                     }
