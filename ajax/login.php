@@ -99,7 +99,7 @@ if (!empty($_POST['img'])) {
 //写Session
 $_SESSION['user'] = $ret;
 
-echo $_SESSION;
+echo $_SESSION['user'];
 die;
 
 //写Cookie
