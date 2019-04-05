@@ -232,17 +232,14 @@ var app = new Vue({
         },
         //微信公众号登陆
         wxSubmitLoginModal: function () {
-            alert(1112);
             var vm = this;
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: 'http://v.crazy-dog.cn/api/oauth',
                 xhrFields: {
                     withCredentials: true
                 },
                 crossDomain: true,
-                data: {},
-                dataType: 'json',
                 success: function (data) {
                     if (data) {
                         //成功 已登录 跳转
