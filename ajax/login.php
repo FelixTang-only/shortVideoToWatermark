@@ -96,7 +96,7 @@ if ($_POST['isReg'] != "false") {
 $_SESSION['user'] = $ret;
 
 if (isset($_POST['img'])) {
-    $_SESSION['headimg'] = $_POST['img'];
+    $_SESSION['user']['headimg'] = $_POST['img'];
 }
 exit(json_encode($_SESSION['user']));
 
