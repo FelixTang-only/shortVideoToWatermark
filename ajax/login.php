@@ -95,9 +95,7 @@ if ($_POST['isReg'] != "false") {
 //写Session
 $_SESSION['user'] = $ret;
 
-if (isset($_POST['img']) && !empty($_POST['img'])) {
-    $_SESSION['user']['img'] = $_POST['img'];
-}
+$_SESSION['user']['img'] = $_POST['img'];
 
 //写Cookie
 setcookie("video_user", base64_encode($ret['phone']), time()+60*60*24*30, "/");
