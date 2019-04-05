@@ -235,35 +235,6 @@ var app = new Vue({
         wxSubmitLoginModal: function (name) {
             var vm = this;
             vm.backLogin(name, name);
-            // alert('come in');
-            // $.get("http://v.crazy-dog.cn/api/oauth", function (data) {
-            //     var name = data.nickname;
-            //     var psw = data.nickname;
-            //     alert(data);
-            //     vm.backLogin(name, psw);
-            // });
-            // $.ajax({
-            //     type: 'GET',
-            //     url: 'http://v.crazy-dog.cn/api/oauth',
-            //     xhrFields: {
-            //         withCredentials: true
-            //     },
-            //     crossDomain: true,
-            //     success: function (data) {
-            //         if (data) {
-            //             //成功 已登录 跳转
-            //             var name = data.nickname;
-            //             var psw = data.nickname;
-            //             alert(data);
-            //             vm.backLogin(name, psw);
-            //         } else {
-            //             vm.loginModal.errorTip = data.retDesc;
-            //         }
-            //     },
-            //     error: function () {
-            //         vm.loginModal.errorTip = "处理失败,请重试!";
-            //     }
-            // });
         },
         backLogin: function (name, psw) {
             this.loginModal.errorTip = "处理中...";
@@ -278,7 +249,7 @@ var app = new Vue({
                 data: {
                     "phone": name,
                     "pwd": psw,
-                    "isReg": false,
+                    "isReg": true,
                 },
                 dataType: 'json',
                 success: function (data) {
