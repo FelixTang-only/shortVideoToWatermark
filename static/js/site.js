@@ -75,6 +75,15 @@ var app = new Vue({
             }
         }
     },
+    created () {
+        var isWeixin = function () { //判断是否是微信
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.match(/MicroMessenger/i) == "micromessenger";
+        };
+        if (isWeixin()) {
+           this.wxSubmitLoginModal();
+        }
+    },
     methods: {
         submitactivationSearchCodeForm: function () {
             if (this.activationSearchCode.status == "" || this.activationSearchCode.type == "") {
@@ -213,6 +222,36 @@ var app = new Vue({
                         //成功 已登录 跳转
                         window.location.reload();
                     }else {
+                        vm.loginModal.errorTip = data.retDesc;
+                    }
+                },
+                error: function () {
+                    vm.loginModal.errorTip = "处理失败,请重试!";
+                }
+            });
+        },
+        //微信公众号登陆
+        wxSubmitLoginModal: function () {
+            this.loginModal.errorTip = "处理中...";
+            var vm = this;
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/login.php',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                data: {
+                    "phone": vm.loginModal.phone,
+                    "pwd": vm.loginModal.pwd,
+                    "isReg": false,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.succ) {
+                        //成功 已登录 跳转
+                        window.location.reload();
+                    } else {
                         vm.loginModal.errorTip = data.retDesc;
                     }
                 },
