@@ -256,6 +256,7 @@ var app = new Vue({
                 },
                 dataType: 'json',
                 success: function (data) {
+                    alert(location.href.split('userImg=')[1]);
                     if (data.succ) {
                         //成功 已登录 跳转
                         sessionStorage.setItem('loginStatus', true);
