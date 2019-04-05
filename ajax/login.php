@@ -99,6 +99,9 @@ if (!empty($_POST['img'])) {
 //写Session
 $_SESSION['user'] = $ret;
 
+echo $_SESSION;
+die;
+
 //写Cookie
 setcookie("video_user", base64_encode($ret['phone']), time()+60*60*24*30, "/");
 
