@@ -232,6 +232,7 @@ var app = new Vue({
         },
         //微信公众号登陆
         wxSubmitLoginModal: function () {
+            alert(1112);
             var vm = this;
             $.ajax({
                 type: 'POST',
