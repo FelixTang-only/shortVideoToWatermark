@@ -49,7 +49,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
                             top: 4px;
                             font-size:12px;
                             left: 5px;" alt="头像">
-                         <a style="padding-left: 45px;" href="javascript:$('#userModal').modal('show');"><?php echo addAsterisk($_SESSION['user']['phone']); ?></a>
+                         <a style="padding-left: 45px;" href="javascript:$('#userModal').modal('show');"><?php echo $_SESSION['user']['phone']; ?></a>
                     </li>
                 <?php } ?>
             </ul>
