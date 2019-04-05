@@ -54,6 +54,10 @@ if (!empty($_POST['state']) && $_POST['state'] === 'commit') {
 
     //成功返回
     // $result['succ'] = true;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 29ea7b0c0ce7c072f61e91b59506150783b947d8
     exit(json_encode($ret));
 }
 

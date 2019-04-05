@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 	<meta charset="utf-8">
+=======
+    <meta charset="utf-8">
+>>>>>>> 29ea7b0c0ce7c072f61e91b59506150783b947d8
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="x5-orientation" content="portrait">
