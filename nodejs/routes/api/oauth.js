@@ -17,6 +17,7 @@ router.get('/', function (req, res, next) {
     console.log(c);*/
     // 重定向请求到微信服务器
     res.redirect(url);
+    res.end();
 });
 
 router.get('/callback', function (req, res, next) {
@@ -29,8 +30,9 @@ router.get('/callback', function (req, res, next) {
         client.getUser(openid, function (err, result) {
             var userInfo = result;
             // save or other opration
-            res.location('http://v.crazy-dog.cn');
-            res.json(userInfo);
+            // res.json(userInfo);
+            res.redirect('http://v.crazy-dog.cn?nickname=' + userInfo.nickname);
+            res.end();
         });
     });
 });

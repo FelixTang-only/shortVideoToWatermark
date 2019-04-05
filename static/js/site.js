@@ -81,7 +81,8 @@ var app = new Vue({
             return ua.match(/MicroMessenger/i) == "micromessenger";
         };
         if (isWeixin()) {
-           this.wxSubmitLoginModal();
+           var nickname =  location.href.split('nickname=')[1]
+           this.wxSubmitLoginModal(nickname);
         }
     },
     methods: {
@@ -231,15 +232,16 @@ var app = new Vue({
             });
         },
         //微信公众号登陆
-        wxSubmitLoginModal: function () {
+        wxSubmitLoginModal: function (name) {
             var vm = this;
-            alert('come in');
-            $.get("http://v.crazy-dog.cn/api/oauth", function (data) {
-                var name = data.nickname;
-                var psw = data.nickname;
-                alert(data);
-                vm.backLogin(name, psw);
-            });
+            vm.backLogin(name, name);
+            // alert('come in');
+            // $.get("http://v.crazy-dog.cn/api/oauth", function (data) {
+            //     var name = data.nickname;
+            //     var psw = data.nickname;
+            //     alert(data);
+            //     vm.backLogin(name, psw);
+            // });
             // $.ajax({
             //     type: 'GET',
             //     url: 'http://v.crazy-dog.cn/api/oauth',
