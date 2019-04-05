@@ -98,7 +98,6 @@ $_SESSION['user'] = $ret;
 if (isset($_POST['img'])) {
     $_SESSION['user']['headimg'] = $_POST['img'];
 }
-exit(json_encode($_SESSION['user']));
 
 //写Cookie
 setcookie("video_user", base64_encode($ret['phone']), time()+60*60*24*30, "/");
