@@ -82,8 +82,10 @@ var app = new Vue({
         };
         if (isWeixin()) {
            var nickname =  location.href.split('nickname=')[1];
-           if (!sessionStorage.getItem('loginStatus')) return;
-           this.wxSubmitLoginModal(nickname);
+           if (typeof sessionStorage.getItem('loginStatus') !== 'undefined'){
+            if (!sessionStorage.getItem('loginStatus')) return;
+            this.wxSubmitLoginModal(nickname);
+           }
         }
     },
     methods: {
