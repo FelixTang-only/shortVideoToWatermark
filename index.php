@@ -41,7 +41,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
                  <?php } else { ?>
                      <li> 
                           <img 
-                            src="<?php if(isset($_SESSION['user']['headimg'])){echo $_SESSION['user']['headimg'];} else if (!isset($_SESSION['user']['headimg'])) { echo 'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg';} ?>"
+                            src="<?php if(!empty($_SESSION['user']['headimg'])){echo $_SESSION['user']['headimg'];} else { echo 'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg';} ?>"
                             style="
                             border-radius: 15px;
                             width: 30px;
