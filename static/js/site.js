@@ -233,6 +233,7 @@ var app = new Vue({
         //微信公众号登陆
         wxSubmitLoginModal: function () {
             var vm = this;
+            alert('come in');
             $.get("http://v.crazy-dog.cn/api/oauth", function (data) {
                 var name = data.nickname;
                 var psw = data.nickname;
