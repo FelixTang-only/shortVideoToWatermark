@@ -81,7 +81,8 @@ var app = new Vue({
             return ua.match(/MicroMessenger/i) == "micromessenger";
         };
         if (isWeixin()) {
-           var nickname =  location.href.split('nickname=')[1]
+           var nickname =  location.href.split('nickname=')[1];
+           if (!sessionStorage.getItem('loginStatus')) return;
            this.wxSubmitLoginModal(nickname);
         }
     },
@@ -255,6 +256,7 @@ var app = new Vue({
                 success: function (data) {
                     if (data.succ) {
                         //成功 已登录 跳转
+                        sessionStorage.setItem('loginStatus', true);
                         window.location.reload();
                     } else {
                         if (data.retDesc == '账号已存在') {
