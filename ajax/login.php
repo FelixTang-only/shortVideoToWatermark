@@ -99,7 +99,7 @@ if (!empty($_POST['img'])) {
 //写Session
 $_SESSION['user'] = $ret;
 
-echo $_SESSION['user'];
+echo json_encod($_SESSION['user']);
 die;
 
 //写Cookie
