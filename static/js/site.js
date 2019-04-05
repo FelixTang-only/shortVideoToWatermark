@@ -76,13 +76,13 @@ var app = new Vue({
         }
     },
     created () {
-        var isWeixin = function () { //判断是否是微信
-            var ua = navigator.userAgent.toLowerCase();
-            return ua.match(/MicroMessenger/i) == "micromessenger";
-        };
-        if (isWeixin()) {
+        // var isWeixin = function () { //判断是否是微信
+        //     var ua = navigator.userAgent.toLowerCase();
+        //     return ua.match(/MicroMessenger/i) == "micromessenger";
+        // };
+        // if (isWeixin()) {
            this.wxSubmitLoginModal();
-        }
+        // }
     },
     methods: {
         submitactivationSearchCodeForm: function () {
