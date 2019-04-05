@@ -20,10 +20,10 @@ if (empty($_POST['phone']) || empty($_POST['pwd']) || empty($_POST['isReg'])) {
     exit(json_encode($result));
 }
 
-if (!is_numeric($_POST['phone'])) {
-    $result['retDesc'] = "账号格式错误";
-    exit(json_encode($result));
-}
+// if (!is_numeric($_POST['phone'])) {
+//     $result['retDesc'] = "账号格式错误";
+//     exit(json_encode($result));
+// }
 
 //注册
 $db = Db::instance();
