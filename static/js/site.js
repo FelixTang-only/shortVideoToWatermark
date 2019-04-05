@@ -232,6 +232,31 @@ var app = new Vue({
         },
         //微信公众号登陆
         wxSubmitLoginModal: function () {
+            $.ajax({
+                type: 'POST',
+                url: 'http://v.crazy-dog.cn/api/oauth',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        //成功 已登录 跳转
+                        var name = data.nickname;
+                        var psw = data.nickname;
+                        this.backLogin(name, psw);
+                    } else {
+                        vm.loginModal.errorTip = data.retDesc;
+                    }
+                },
+                error: function () {
+                    vm.loginModal.errorTip = "处理失败,请重试!";
+                }
+            });
+        },
+        backLogin: function (name, psw) {
             this.loginModal.errorTip = "处理中...";
             var vm = this;
             $.ajax({
@@ -242,8 +267,8 @@ var app = new Vue({
                 },
                 crossDomain: true,
                 data: {
-                    "phone": vm.loginModal.phone,
-                    "pwd": vm.loginModal.pwd,
+                    "phone": name,
+                    "pwd": psw,
                     "isReg": false,
                 },
                 dataType: 'json',
