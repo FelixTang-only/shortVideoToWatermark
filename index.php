@@ -40,8 +40,9 @@ $adData = json_decode(ConfigData::getAdData(), true);
                      <li><a href="javascript:$('#loginModal').modal('show');">登录/注册</a></li>
                  <?php } else { ?>
                      <li>
+                        
                          <img 
-                            src="<?php if(!empty($_SESSION['user']['img'])){echo $_SESSION['user']['img'];} else { echo 'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg';} ?>"
+                            src="<?php $_SESSION['user']['headimg'] ?>"
                             style="
                             border-radius: 15px;
                             width: 30px;

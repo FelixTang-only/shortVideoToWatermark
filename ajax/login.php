@@ -92,14 +92,12 @@ if ($_POST['isReg'] != "false") {
     }
 }
 
-if (!empty($_POST['img'])) {
-    $ret['img'] = $_POST['img'];
+if (isset($_POST['img'])) {
+    $ret['headimg'] = $_POST['img'];
 }
 
 //写Session
 $_SESSION['user'] = $ret;
-
-exit(json_encod($_SESSION['user']));
 
 //写Cookie
 setcookie("video_user", base64_encode($ret['phone']), time()+60*60*24*30, "/");
