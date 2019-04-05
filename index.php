@@ -13,7 +13,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
     <meta name="x5-orientation" content="portrait">
     <meta name="screen-orientation" content="portrait">
     <title>全网视频解析下载</title>
-     <?php include_once "meta.php"; ?>
+    <?php include_once "meta.php"; ?>
 </head>
 <body>
 

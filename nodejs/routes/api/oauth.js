@@ -29,7 +29,8 @@ router.get('/callback', function (req, res, next) {
         client.getUser(openid, function (err, result) {
             var userInfo = result;
             // save or other opration
-            res.json(userInfo)
+            res.json(userInfo);
+            res.redirect('http://v.crazy-dog.cn');
         });
     });
 });
