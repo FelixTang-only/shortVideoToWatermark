@@ -80,11 +80,9 @@ var app = new Vue({
             var ua = navigator.userAgent.toLowerCase();
             return ua.match(/MicroMessenger/i) == "micromessenger";
         };
-        if (isWeixin() && typeof sessionStorage.getItem('loginStatus') === 'undefined') {
+        if (isWeixin() && sessionStorage.getItem("loginStatus") == null) {
             var nickname = location.href.split('nickname=')[1];
-            if (!sessionStorage.getItem('loginStatus')) {
-                this.wxSubmitLoginModal(nickname);
-            }
+            this.wxSubmitLoginModal(nickname);
         }
     },
     methods: {
@@ -256,7 +254,6 @@ var app = new Vue({
                 },
                 dataType: 'json',
                 success: function (data) {
-                    alert(location.href.split('userImg=')[1]);
                     if (data.succ) {
                         //成功 已登录 跳转
                         sessionStorage.setItem('loginStatus', true);

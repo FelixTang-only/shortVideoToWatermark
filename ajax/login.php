@@ -95,6 +95,7 @@ if ($_POST['isReg'] != "false") {
 if (!empty($_POST['img'])) {
     $ret['img'] = $_POST['img'];
 }
+
 //写Session
 $_SESSION['user'] = $ret;
 
