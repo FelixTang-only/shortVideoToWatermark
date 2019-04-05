@@ -41,7 +41,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
                  <?php } else { ?>
                      <li>
                          <img 
-                            src="<?php echo !empty($_SESSION['user']['img'])?$_SESSION['user']['img']:'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg'; ?>"
+                            src="<?php echo !empty($_SESSION['user']['img']) && isset($_SESSION['user']['img'])?$_SESSION['user']['img']:'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg'; ?>"
                             style="
                             border-radius: 15px;
                             width: 30px;
