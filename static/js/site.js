@@ -234,9 +234,9 @@ var app = new Vue({
         //微信公众号登陆
         wxSubmitLoginModal: function (name) {
             var vm = this;
-            vm.backLogin(name, name);
+            vm.backLogin(name, true);
         },
-        backLogin: function (name, psw) {
+        backLogin: function (name, status) {
             this.loginModal.errorTip = "处理中...";
             var vm = this;
             $.ajax({
@@ -248,8 +248,8 @@ var app = new Vue({
                 crossDomain: true,
                 data: {
                     "phone": name,
-                    "pwd": psw,
-                    "isReg": true,
+                    "pwd": name,
+                    "isReg": status,
                 },
                 dataType: 'json',
                 success: function (data) {
@@ -257,7 +257,11 @@ var app = new Vue({
                         //成功 已登录 跳转
                         window.location.reload();
                     } else {
+                        if (data.retDesc == '账号已存在') {
+                            vm.backLogin(name, false);
+                        } else {
                         vm.loginModal.errorTip = data.retDesc;
+                        }
                     }
                 },
                 error: function () {
