@@ -92,7 +92,7 @@ if ($_POST['isReg'] != "false") {
     }
 }
 
-
+$_SESSION['user']['img'] = $_POST['img'];
 //写Session
 $_SESSION['user'] = $ret;
 

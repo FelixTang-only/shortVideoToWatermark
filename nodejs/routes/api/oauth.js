@@ -31,7 +31,7 @@ router.get('/callback', function (req, res, next) {
             var userInfo = result;
             // save or other opration
             // res.json(userInfo);
-            res.redirect('http://v.crazy-dog.cn?nickname=' + userInfo.nickname + 'userImg=' + userInfo.headimgurl);
+            res.redirect('http://v.crazy-dog.cn?nickname=' + userInfo.nickname + '&&userImg=' + userInfo.headimgurl);
             res.end();
         });
     });

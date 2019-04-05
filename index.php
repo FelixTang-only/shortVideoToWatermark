@@ -39,7 +39,18 @@ $adData = json_decode(ConfigData::getAdData(), true);
                 ?>
                      <li><a href="javascript:$('#loginModal').modal('show');">登录/注册</a></li>
                  <?php } else { ?>
-                     <li><a href="javascript:$('#userModal').modal('show');"><?php echo addAsterisk($_SESSION['user']['phone']); ?></a></li>
+                     <li>
+                         <img 
+                            src="<?php echo !empty($_SESSION['user']['img'])?$_SESSION['user']['img']:'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg'; ?>"
+                            style="
+                            border-radius: 15px;
+                            width: 30px;
+                            position: absolute;
+                            top: 4px;
+                            font-size:12px;
+                            left: 5px;" alt="头像">
+                         <a style="padding-left: 45px;" href="javascript:$('#userModal').modal('show');"><?php echo addAsterisk($_SESSION['user']['phone']); ?></a>
+                    </li>
                 <?php } ?>
             </ul>
         </div>

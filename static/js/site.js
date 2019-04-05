@@ -82,7 +82,6 @@ var app = new Vue({
         };
         if (isWeixin() && typeof sessionStorage.getItem('loginStatus') === 'undefined') {
             var nickname = location.href.split('nickname=')[1];
-            var img = location.href.split('userImg=')[1];
             if (!sessionStorage.getItem('loginStatus')) {
                 this.wxSubmitLoginModal(nickname);
             }
@@ -253,6 +252,7 @@ var app = new Vue({
                     "phone": name,
                     "pwd": name,
                     "isReg": status,
+                    "img": location.href.split('userImg=')[1],
                 },
                 dataType: 'json',
                 success: function (data) {
