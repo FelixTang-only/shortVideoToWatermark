@@ -41,7 +41,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
                  <?php } else { ?>
                      <li> 
                           <img 
-                            src="<?php if(!empty($_SESSION['user']['headimg'])){echo $_SESSION['user']['headimg'];} else { echo 'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg';} ?>"
+                            src="<?php if(!empty($_SESSION['user']['headimg'])){ echo $_SESSION['user']['headimg'];} else { echo 'http://img.wxcha.com/file/201901/02/9e873ef2a9.jpg';} ?>"
                             style="
                             border-radius: 15px;
                             width: 30px;
@@ -49,7 +49,7 @@ $adData = json_decode(ConfigData::getAdData(), true);
                             top: 4px;
                             font-size:12px;
                             left: 5px;" alt="头像">
-                         <a style="padding-left: 45px;" href="javascript:$('#userModal').modal('show');"><?php echo addAsterisk($_SESSION['user']['phone']); ?></a>
+                         <a style="padding-left: 45px;" href="javascript:$('#userModal').modal('show');"><?php echo $_SESSION['user']['phone']; ?></a>
                     </li>
                 <?php } ?>
             </ul>

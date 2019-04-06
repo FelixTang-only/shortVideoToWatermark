@@ -77,7 +77,7 @@ if (isset($_POST['install'])) { //安装
       `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
       `phone` varchar(16) NOT NULL COMMENT '账号',
       `password` char(32) NOT NULL COMMENT '密码',
-      `headimg` varchar(100) NOT NULL COMMENT '头像',
+      `headimg` varchar(1000) NOT NULL COMMENT '头像',
       `user_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:单人用户 2:团队用户 3:管理员',
       `experience_used` int(11) NOT NULL DEFAULT '0' COMMENT '已使用的免费体验次数',
       `vip_expire_time` int(11) DEFAULT NULL COMMENT '会员过期时间,如果为空则从未充值',
