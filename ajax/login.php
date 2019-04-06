@@ -40,7 +40,7 @@ if ($_POST['isReg'] != "false") {
     }
 
     $db->create('video_user', array (
-            'phone' =>  $_POST['phone'],
+            'phone' => trim($_POST['phone']),
             'password' => md5($_POST['pwd']),
             'headimg' => $_POST['img'],
             'user_type' => 1,
