@@ -13,7 +13,6 @@ const betRouter = require('./routes/bet');
 const userRouter = require('./routes/user');
 const oauthRouter = require('./routes/oauth');
 const apiOauthRouter = require('./routes/api/oauth');
-
 const app = express();
 
 // 设置允许跨域访问
